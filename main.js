@@ -9,7 +9,7 @@ class SRB {
   }
 
   toArray() {
-    return this.store
+    return this.store.slice(-this.size)
   }
 }
 

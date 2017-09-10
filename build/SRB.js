@@ -11,7 +11,7 @@ SRB.prototype.add = function add (items) {
 };
 
 SRB.prototype.toArray = function toArray () {
-  return this.store
+  return this.store.slice(-this.size)
 };
 
 return SRB;

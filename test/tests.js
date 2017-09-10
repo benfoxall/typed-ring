@@ -1,6 +1,6 @@
 const expect = chai.expect
 
-describe('shared ring buffer', () => {
+describe('basic api', () => {
 
   it('stores', () => {
     const ring = new SRB(10)
@@ -27,5 +27,36 @@ describe('shared ring buffer', () => {
       ])
 
   })
+
+})
+
+
+describe('shared buffer', () => {
+
+  const ring = new SRB(5)
+  const ring2 = new SRB(ring.buffer)
+
+  ring.add([1,2,3])
+
+  it('has a shared backing buffer', () => {
+    expect(ring.buffer)
+      .to.be.a('SharedArrayBuffer')
+
+    expect(ring.buffer)
+      .to.equal(ring2.buffer)
+  })
+
+  it('initialises the second ring', () => {
+    expect(ring2.size)
+      .to.eql(5)
+  })
+
+  xit('populates across', () => {
+    expect(ring2.toArray())
+      .to.eql([
+        1,2,3
+      ])
+  })
+
 
 })

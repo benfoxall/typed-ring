@@ -82,5 +82,42 @@ describe('output', () => {
       .to.eql([4,5,6,7])
 
   })
-  
+
+})
+
+
+describe('shared buffer', () => {
+
+  const ring = new RingBuffer(Uint16Array, 10)
+  ring.add([1,2,3,4,5,6])
+
+  const ring2 = new RingBuffer(Uint16Array, ring.buffer)
+
+  it('has the same length', () => {
+    expect(ring2.array.length)
+      .to.eql(10)
+  })
+
+  it('has the same data', () => {
+
+    const target = new Uint16Array(6)
+    ring2.fill(target)
+
+    expect(Array.from(target))
+      .to.eql([1,2,3,4,5,6])
+  })
+
+  it('can update either', () => {
+    ring.add(7)
+    ring2.add(8)
+    ring.add(9)
+
+    const target = new Uint16Array(6)
+    ring2.fill(target)
+
+    expect(Array.from(target))
+      .to.eql([4,5,6,7,8,9])
+
+  })
+
 })

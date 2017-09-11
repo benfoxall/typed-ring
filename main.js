@@ -6,7 +6,10 @@ class RingBuffer {
     if(Number.isFinite(n)) {
       const bytes = (this.ArrayType.BYTES_PER_ELEMENT * n) + 2
       this.buffer = new Uint8Array(bytes).buffer
-    } else {
+    } else if (n instanceof ArrayBuffer) {
+      this.buffer = n
+    }
+    else {
       throw new Error("Couldn't construct RingBuffer")
     }
 

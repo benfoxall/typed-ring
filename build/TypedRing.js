@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.RingBuffer = factory());
+	(global.TypedRing = factory());
 }(this, (function () { 'use strict';
 
 var RingBuffer = function RingBuffer(ArrayType, n) {
@@ -11,7 +11,10 @@ var RingBuffer = function RingBuffer(ArrayType, n) {
   if(Number.isFinite(n)) {
     var bytes = (this.ArrayType.BYTES_PER_ELEMENT * n) + 2;
     this.buffer = new Uint8Array(bytes).buffer;
-  } else {
+  } else if (n instanceof ArrayBuffer) {
+    this.buffer = n;
+  }
+  else {
     throw new Error("Couldn't construct RingBuffer")
   }
 

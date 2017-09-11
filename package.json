@@ -1,9 +1,9 @@
 {
-  "name": "shared-ring-buffer",
+  "name": "typed-ring",
   "version": "1.0.0",
-  "main": "build/RingBuffer.js",
+  "main": "build/TypedRing.js",
   "main:next": "index.js",
-  "repository": "git@github.com:benfoxall/shared-ring-buffer.git",
+  "repository": "git@github.com:benfoxall/typed-ring.git",
   "author": "Ben Foxall <benfoxall@gmail.com>",
   "license": "MIT",
   "devDependencies": {

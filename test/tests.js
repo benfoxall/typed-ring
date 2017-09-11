@@ -2,7 +2,7 @@ const expect = chai.expect
 
 describe('buffer store', () => {
 
-  const ring = new RingBuffer(Uint16Array, 5)
+  const ring = new TypedRing(Uint16Array, 5)
   const _store = new Uint16Array(ring.buffer)
 
   it('sets initial', () => {
@@ -50,7 +50,7 @@ describe('buffer store', () => {
 
 describe('output', () => {
 
-  const ring = new RingBuffer(Uint16Array, 10)
+  const ring = new TypedRing(Uint16Array, 10)
   ring.add([1,2,3,4,5,6])
 
   it('takes last elements', () => {
@@ -70,7 +70,7 @@ describe('output', () => {
 
   })
 
-  const s_ring = new RingBuffer(Uint16Array, 4)
+  const s_ring = new TypedRing(Uint16Array, 4)
   s_ring.add([1,2,3,4,5,6,7])
 
   it('wraps around', () => {
@@ -88,10 +88,10 @@ describe('output', () => {
 
 describe('shared buffer', () => {
 
-  const ring = new RingBuffer(Uint16Array, 10)
+  const ring = new TypedRing(Uint16Array, 10)
   ring.add([1,2,3,4,5,6])
 
-  const ring2 = new RingBuffer(Uint16Array, ring.buffer)
+  const ring2 = new TypedRing(Uint16Array, ring.buffer)
 
   it('has the same length', () => {
     expect(ring2.array.length)
